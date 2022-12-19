@@ -2,48 +2,20 @@
 
 def safe_print_list(my_list=[], x=0):
 
-    num_of_elem = 0
+    c = 0
 
-    len_list = 0
+    for i in range(x):
 
-    counter = 0
+        try:
 
-    for item in my_list:
+            print(my_list[i], end="")
 
-        len_list += 1
+            c += 1
 
-    try:
+        except IndexError:
 
-        if (x == 0):
+            break
 
-            return num_of_elem
+    print()
 
-        if (x >= len_list):
-
-            for elem in my_list:
-
-                print("{}".format(elem), end="")
-
-            print()
-
-            return len_list
-
-        else:
-
-            for elem in my_list:
-
-                num_of_elem += 1
-
-                print("{}".format(elem), end="")
-
-                if (num_of_elem == x):
-
-                    break
-
-            print()
-
-            return num_of_elem
-
-    except BaseException:
-
-        pass
+    return c
