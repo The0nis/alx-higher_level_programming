@@ -1,6 +1,4 @@
-#!/usr/bin/python3
-
-def list_division(my_list_1, my_list_2, list_length):
+st_division(my_list_1, my_list_2, list_length):
 
     new_list = []
 
@@ -32,4 +30,4 @@ def list_division(my_list_1, my_list_2, list_length):
 
             new_list.append(result)
 
-    return 
+    return new_list
