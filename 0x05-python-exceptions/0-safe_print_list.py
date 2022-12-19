@@ -2,22 +2,48 @@
 
 def safe_print_list(my_list=[], x=0):
 
-    count = 0
+    num_of_elem = 0
 
-    if (x > 0):
+    len_list = 0
 
-        for i in range(x):
+    counter = 0
 
-            try:
+    for item in my_list:
 
-                print("{:d}".format(my_list[i]), end='')
+        len_list += 1
 
-                count += 1
+    try:
 
-            except:
+        if (x == 0):
 
-                break
+            return num_of_elem
 
-    print('')
+        if (x >= len_list):
 
-    return (count)
+            for elem in my_list:
+
+                print("{}".format(elem), end="")
+
+            print()
+
+            return len_list
+
+        else:
+
+            for elem in my_list:
+
+                num_of_elem += 1
+
+                print("{}".format(elem), end="")
+
+                if (num_of_elem == x):
+
+                    break
+
+            print()
+
+            return num_of_elem
+
+    except BaseException:
+
+        pass
