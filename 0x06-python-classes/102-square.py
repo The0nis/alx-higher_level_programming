@@ -1,203 +1,135 @@
-#!/usr/bin/python3
-
-"""Defines a class Square"""
-
-
-
-
-
 class Square:
 
-    """Represents a square
-
-    Attributes:
-
-        __size (int): size of a side of the square
-
-    """
-
-    def __init__(self, size=0):
-
-        """initializes the square
-
-        Args:
-
-            size (int): size of a side of the square
-
-        Returns:
-
-            None
-
-        """
+    def __init__(self, size=0, position=(0, 0)):
 
         self.size = size
 
+        self.position = position
 
-
-    def area(self):
-
-        """calculates the square's area
-
-        Returns:
-
-            The area of the square
-
-        """
-
-        return (self.__size) ** 2
-
-
+    
 
     @property
 
     def size(self):
 
-        """getter of __size
+        return self._size
 
-        Returns:
-
-            The size of the square
-
-        """
-
-        return self.__size
-
-
+    
 
     @size.setter
 
     def size(self, value):
 
-        """setter of __size
-
-        Args:
-
-            value (int): the size of a size of the square
-
-        Returns:
-
-            None
-
-        """
-
-        if type(value) is not int:
+        if not isinstance(value, int):
 
             raise TypeError("size must be an integer")
 
-        else:
+        if value < 0:
 
-            if value < 0:
+            raise ValueError("size must be >= 0")
 
-                raise ValueError("size must be >= 0")
+        self._size = value
 
-            else:
+    
 
-                self.__size = value
+    @property
 
+    def position(self):
 
+        return self._position
 
-    def __lt__(self, other):
+    
 
-        """Compare if square is less than another by area
+    @position.setter
 
-        Args:
+    def position(self, value):
 
-            other (Square): square to compare against
+        if not isinstance(value, tuple) or len(value) != 2 or not all(isinstance(i, int) and i >= 0 for i in value):
 
-        Returns:
+            raise TypeError("position must be a tuple of 2 positive integers")
 
-            True or False
+        self._position = value
 
-        """
+    
 
-        return self.size < other.size
+    def area(self):
 
+        return self.size ** 2
 
+    
 
-    def __le__(self, other):
+    def my_print(self):
 
-        """Compare if square is less than or equal to another by area
+        if self.size == 0:
 
-        Args:
+            print()
 
-            other (Square): square to compare against
+            return
 
-        Returns:
+        for _ in range(self.position[1]):
 
-            True or False
+            print()
 
-        """
+        for i in range(self.size):
 
-        return self.size <= other.size
+            print(" " * self.position[0] + "#" * self.size)
 
+    
 
+    def __str__(self):
+
+        res = []
+
+        if self.size == 0:
+
+            res.append("")
+
+            return "\n".join(res)
+
+        for _ in range(self.position[1]):
+
+            res.append("")
+
+        for i in range(self.size):
+
+            res.append(" " * self.position[0] + "#" * self.size)
+
+        return "\n".join(res)
+
+    
 
     def __eq__(self, other):
 
-        """Compare if square is equal to another by area
+        return isinstance(other, Square) and self.size == other.size
 
-        Args:
-
-            other (Square): square to compare against
-
-        Returns:
-
-            True or False
-
-        """
-
-        return self.size == other.size
-
-
+    
 
     def __ne__(self, other):
 
-        """Compare if square is not equal to another by area
+        return not self == other
 
-        Args:
-
-            other (Square): square to compare against
-
-        Returns:
-
-            True or False
-
-        """
-
-        return self.size != other.size
-
-
-
-    def __ge__(self, other):
-
-        """Compare if square is greater than or equal to another by area
-
-        Args:
-
-            other (Square): square to compare against
-
-        Returns:
-
-            True or False
-
-        """
-
-        return self.size >= other.size
-
-
+    
 
     def __gt__(self, other):
 
-        """Compare if square is greater than another by area
+        return isinstance(other, Square) and self.area() > other.area()
 
-        Args:
+    
 
-            other (Square): square to compare against
+    def __ge__(self, other):
 
-        Returns:
+        return self > other or self == other
 
-            True or False
+    
 
-        """
+    def __lt__(self, other):
 
-        return self.size > other.size
+        return not self >= other
+
+    
+
+    def __le__(self, other):
+
+        return not self > other
+
+
